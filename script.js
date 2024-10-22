@@ -111,11 +111,25 @@ function speakText() {
 	speechSynthesis.speak(message);
 }
 
+// Set voice
+function setVoice(e) {
+	message.voice = voices.find((voice) => voice.name === e.target.value);
+}
+
 // Event Listener
 toggleBtn.addEventListener('click', () => document.getElementById('text-box').classList.toggle('show'));
 closeBtn.addEventListener('click', () => document.getElementById('text-box').classList.remove('show'));
 
 // Voices
 speechSynthesis.addEventListener('voiceschanged', getVoices);
+
+// Change voice
+voicesSelect.addEventListener('change', setVoice);
+
+// Read text
+readBtn.addEventListener('click', () => {
+	setTextMessage(textarea.value);
+	speakText();
+});
 
 getVoices();
